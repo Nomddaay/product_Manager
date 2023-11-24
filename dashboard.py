@@ -1,4 +1,6 @@
 import tkinter as tk
+from tkinter import messagebox
+import csv
 from screenProduct import screenProduct  # Import the ScreenMain class
 
 class Dashboard(tk.Tk):
@@ -46,7 +48,3 @@ class Dashboard(tk.Tk):
         for widget in self.main_frame.winfo_children():
             widget.destroy()
 
-if __name__ == "__main__":
-    app = Dashboard()
-    app.geometry("1000x650")
-    app.mainloop()
