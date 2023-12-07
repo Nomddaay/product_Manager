@@ -1,9 +1,9 @@
 import tkinter as tk
 from tkinter import messagebox
-import csv
 from screenProduct import screenProduct
 from screenCategory import screenCategory
 from screenHome import screenHome
+from screenOrder import OrderApp
 
 class Dashboard(tk.Tk):
     def __init__(self):
@@ -15,9 +15,10 @@ class Dashboard(tk.Tk):
         menu_bar = tk.Menu(self)
 
         file_menu = tk.Menu(menu_bar, tearoff=0)
-        file_menu.add_command(label="Home", command=self.show_home)
-        file_menu.add_command(label="Page 1", command=self.pageProduct)
-        file_menu.add_command(label="Page 2", command=self.show_page2)
+        file_menu.add_command(label="biểu đồ", command=self.show_home)
+        file_menu.add_command(label="order", command=self.order)
+        file_menu.add_command(label="product", command=self.pageProduct)
+        file_menu.add_command(label="category", command=self.show_page2)
         file_menu.add_separator()
         file_menu.add_command(label="Exit", command=self.destroy)
 
@@ -33,8 +34,6 @@ class Dashboard(tk.Tk):
 
     def show_home(self):
         self.clear_frame()
-        # label = tk.Label(self.main_frame, text="Welcome to the Home Page!", font=("Helvetica", 16))
-        # label.pack(pady=20)
         home_screen = screenHome(self.main_frame)
 
     def pageProduct(self):
@@ -44,6 +43,11 @@ class Dashboard(tk.Tk):
     def show_page2(self):
         self.clear_frame()
         screen2 = screenCategory(self.main_frame)
+
+    def order(self):
+        root = tk.Tk()
+        app = OrderApp(root)
+        root.mainloop()
 
     def clear_frame(self):
         # Xóa nội dung của frame trước khi hiển thị trang mới
