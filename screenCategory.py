@@ -39,11 +39,11 @@ class screenCategory:
         self.name_label.grid(row=2, column=0, sticky="E")
         self.name_entry.grid(row=2, column=1)
 
-        self.add_category_button = tk.Button(self.master, text="Add Category", command=self.add_category)
+        self.add_category_button = tk.Button(self.master, text="Add Product", command=self.add_category)
         self.add_category_button.grid(row=6, column=0, columnspan=1, pady=2)
-        self.update_category_button = tk.Button(self.master, text="Update Category", command=self.update_category)
+        self.update_category_button = tk.Button(self.master, text="Update Product", command=self.update_category)
         self.update_category_button.grid(row=6, column=1, columnspan=1, pady=2)
-        self.delete_category_button = tk.Button(self.master, text="Delete Category", command=self.delete_category)
+        self.delete_category_button = tk.Button(self.master, text="Delete Product", command=self.delete_category)
         self.delete_category_button.grid(row=6, column=2, columnspan=1, pady=2)
 
         self.sort_by_id_button = tk.Button(self.master, text="Sort by ID", command=self.sort_by_id)

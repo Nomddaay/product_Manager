@@ -1,3 +1,4 @@
+import os
 import category as Category 
 import pandas as pd
 
@@ -5,7 +6,7 @@ class Keep:
     def __init__(self):
         self.categories = []
         self.sort_id_ascending = True
-        self.filename = "product_Manager/category.csv"
+        self.filename = "product_Manager/categories.csv"
         self.load_from_csv()
 
     def add_category(self, category):
@@ -26,17 +27,24 @@ class Keep:
         self.save_to_csv()
 
     def display_categories(self):
-        return self.categories        
+        return self.categories
+
+       
 
     def save_to_csv(self):
+        # Kiểm tra nếu thư mục không tồn tại, tạo mới nó
+        if not os.path.exists(os.path.dirname(self.filename)):
+            os.makedirs(os.path.dirname(self.filename))
+
+        # Tạo DataFrame và lưu vào file CSV
         data = {
             'CategoryID': [category.category_id for category in self.categories],
             'Name': [category.name for category in self.categories],
-            'ParentID':[category.parent_id for category in self.categories],
+            'ParentID': [category.parent_id for category in self.categories],
         }
 
         df = pd.DataFrame(data)
-        df.to_csv(self.filename, index = False)
+        df.to_csv(self.filename, index=False)
     
     def load_from_csv(self):
         try:
