@@ -1,7 +1,9 @@
 import tkinter as tk
 from tkinter import messagebox
 import csv
-from screenProduct import screenProduct  # Import the ScreenMain class
+from screenProduct import screenProduct
+from screenCategory import screenCategory
+from screenHome import screenHome
 
 class Dashboard(tk.Tk):
     def __init__(self):
@@ -31,8 +33,9 @@ class Dashboard(tk.Tk):
 
     def show_home(self):
         self.clear_frame()
-        label = tk.Label(self.main_frame, text="Welcome to the Home Page!", font=("Helvetica", 16))
-        label.pack(pady=20)
+        # label = tk.Label(self.main_frame, text="Welcome to the Home Page!", font=("Helvetica", 16))
+        # label.pack(pady=20)
+        home_screen = screenHome(self.main_frame)
 
     def pageProduct(self):
         self.clear_frame()
@@ -40,8 +43,7 @@ class Dashboard(tk.Tk):
 
     def show_page2(self):
         self.clear_frame()
-        label = tk.Label(self.main_frame, text="You are now on Page 2.", font=("Helvetica", 16))
-        label.pack(pady=20)
+        screen2 = screenCategory(self.main_frame)
 
     def clear_frame(self):
         # Xóa nội dung của frame trước khi hiển thị trang mới

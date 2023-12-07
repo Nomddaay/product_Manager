@@ -13,12 +13,12 @@ class Store:
         self.products.append(product)
         self.save_to_csv()
 
-    def update_product(self, product_id, new_name, new_price, new_quantity):
+    def update_product(self, product_id, new_name, new_price):
         for product in self.products:
             if product.product_id == product_id:
                 product.name = new_name
                 product.price = new_price
-                product.quantity = new_quantity
+                # product.quantity = new_quantity
                 break
         self.save_to_csv()
 
@@ -43,7 +43,7 @@ class Store:
     def load_from_csv(self):
         try:
             df = pd.read_csv(self.filename)
-            self.products = [Product.Product(row['ProductID'], row['Name'], row['Price'], row['Quantity']) for _, row in df.iterrows()]
+            self.products = [Product.Product(row['ProductID'], row['Name'], row['Price']) for _, row in df.iterrows()]
         except FileNotFoundError:
             pass  # Ignore if the file does not exist
 
@@ -65,7 +65,7 @@ class Store:
         self.products = sorted(self.products, key=lambda x: x.price)
         self.save_to_csv()
 
-    def sort_by_quantity(self):
-        self.products = sorted(self.products, key=lambda x: x.quantity)
-        self.save_to_csv()
+    # def sort_by_quantity(self):
+    #     self.products = sorted(self.products, key=lambda x: x.quantity)
+    #     self.save_to_csv()
 

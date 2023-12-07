@@ -11,7 +11,7 @@ class screenProduct:
         self.create_widgets()
 
     def create_widgets(self):
-        columns = ("ID", "Name", "Price", "Quantity")
+        columns = ("ID", "Name", "Price")
         self.product_tree = ttk.Treeview(self.master, columns=columns, show="headings")
 
         for col in columns:
@@ -33,11 +33,11 @@ class screenProduct:
         self.price_entry = tk.Entry(self.master, bd=3)
         self.price_entry.grid(row=3, column=1)
 
-        quantity_label = tk.Label(self.master, text="Product Quantity:")
-        quantity_label.grid(row=4, column=0, sticky="E")
+        # quantity_label = tk.Label(self.master, text="Product Quantity:")
+        # quantity_label.grid(row=4, column=0, sticky="E")
 
-        self.quantity_entry = tk.Entry(self.master,bd=3)
-        self.quantity_entry.grid(row=4, column=1)
+        # self.quantity_entry = tk.Entry(self.master,bd=3)
+        # self.quantity_entry.grid(row=4, column=1)
 
         add_product_button = tk.Button(self.master, text="Add Product", command=self.add_product)
         add_product_button.grid(row = 5, column = 0,columnspan=1, pady=2)
@@ -60,32 +60,32 @@ class screenProduct:
         for item in self.product_tree.get_children():
             self.product_tree.delete(item)
         for product in self.store.display_products():
-            self.product_tree.insert("", "end", values=(product.product_id, product.name, product.price, product.quantity))
+            self.product_tree.insert("", "end", values=(product.product_id, product.name, product.price))
 
     def add_product(self):
         try:
             new_name = self.name_entry.get()
             new_price_str = self.price_entry.get()
-            new_quantity_str = self.quantity_entry.get()
+            # new_quantity_str = self.quantity_entry.get()
 
-            if not new_name or not new_price_str or not new_quantity_str:
+            if not new_name or not new_price_str:
                 messagebox.showwarning("Error", "Please fill in all fields.")
                 return
 
             new_price = float(new_price_str)
-            new_quantity = int(new_quantity_str)
+            # new_quantity = int(new_quantity_str)
 
-            new_product = Product(None, new_name, new_price, new_quantity)
+            new_product = Product(None, new_name, new_price)
             self.store.add_product(new_product)
 
             self.update_product_list()
 
             self.name_entry.delete(0, tk.END)
             self.price_entry.delete(0, tk.END)
-            self.quantity_entry.delete(0, tk.END)
+            # self.quantity_entry.delete(0, tk.END)
 
         except ValueError:
-            messagebox.showwarning("Error", "Please enter valid numeric values for Price and Quantity.")
+            messagebox.showwarning("Error", "Please enter valid numeric values for Price.")
 
     def update_product(self):
         selected_item = self.product_tree.selection()
@@ -98,21 +98,21 @@ class screenProduct:
 
         new_name = self.name_entry.get()
         new_price_str = self.price_entry.get()
-        new_quantity_str = self.quantity_entry.get()
+        # new_quantity_str = self.quantity_entry.get()
 
         if new_name:
             selected_product.name = new_name
         if new_price_str:
             selected_product.price = float(new_price_str)
-        if new_quantity_str:
-            selected_product.quantity = int(new_quantity_str)
+        # if new_quantity_str:
+        #     selected_product.quantity = int(new_quantity_str)
 
         self.store.save_to_csv()
         self.update_product_list()
 
         self.name_entry.delete(0, tk.END)
         self.price_entry.delete(0, tk.END)
-        self.quantity_entry.delete(0, tk.END)
+        # self.quantity_entry.delete(0, tk.END)
 
     def sort_by_id(self):
         self.store.sort_by_id()
