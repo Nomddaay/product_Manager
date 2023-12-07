@@ -46,7 +46,7 @@ class screenHome(tk.Frame):
 
     def display_sales_chart(self, parent_frame):
         # Đọc dữ liệu từ file Excel
-        df = pd.read_excel("nuoc-uong.xlsx")
+        df = pd.read_csv("nuoc-uong.csv")
 
         # Lược bỏ cột 'month' khỏi DataFrame
         df_sales_only = df.drop('month', axis=1)
